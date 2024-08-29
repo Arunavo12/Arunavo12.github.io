@@ -81,6 +81,7 @@
     .header-buttons {
       text-align: center;
       margin-bottom: 20px;
+      display: none; /* Hidden until player count is selected */
     }
 
     .header-buttons button {
@@ -112,77 +113,69 @@
 <body>
   <div class="container">
     <div class="heading">
-      <h1 id="formationTitle">Football Formation: 3-3-3</h1>
+      <h1 id="formationTitle">Select the number of players</h1>
     </div>
     
-    <div class="header-buttons">
-      <button onclick="showFormation('formation1')" class="active">3-3-3</button>
-      <button onclick="showFormation('formation2')">4-4-2</button>
-      <button onclick="showFormation('formation3')">4-3-3</button>
+    <div class="player-select">
+      <label for="playerCount">Number of Players:</label>
+      <select id="playerCount" onchange="showFormations()">
+        <option value="">-- Select --</option>
+        <option value="11">11 Players</option>
+        <option value="10">10 Players</option>
+        <option value="9">9 Players</option>
+        <option value="8">8 Players</option>
+        <option value="7">7 Players</option>
+      </select>
     </div>
 
-    <div id="formation1" class="formation">
-      <!-- Goalkeeper -->
-      <div class="player" data-player="player1" style="top: 50%; left: 1%;">GK</div>
-
-      <!-- Defenders -->
-      <div class="player" data-player="player2" style="top:15%; left: 20%;">LB</div>
-      <div class="player" data-player="player3" style="top: 50%; left: 20%;">CB</div>
-      <div class="player" data-player="player4" style="top: 85%; left: 20%;">RB</div>
-
-      <!-- Midfielders -->
-      <div class="player" data-player="player5" style="top: 15%; left: 50%;">LM</div>
-      <div class="player" data-player="player6" style="top: 50%; left: 50%;">CM</div>
-      <div class="player" data-player="player7" style="top: 85%; left: 50%;">RM</div>
-
-      <!-- Forwards -->
-      <div class="player" data-player="player8" style="top: 15%; left: 85%;">LW</div>
-      <div class="player" data-player="player9" style="top: 50%; left: 85%;">ST</div>
-      <div class="player" data-player="player10" style="top: 85%; left: 85%;">RW</div>
+    <div id="formationOptions" class="header-buttons">
+      <!-- Formation buttons will be dynamically inserted here -->
     </div>
 
-    <<div id="formation2" class="formation" style="display: none;">
-      <!-- Goalkeeper -->
-      <div class="player" data-player="player1" style="top: 50%; left: 1%;">GK</div>
-    
-      <!-- Defenders -->
-      <div class="player" data-player="player2" style="top: 20%; left: 20%;">LB</div>
-      <div class="player" data-player="player3" style="top: 40%; left: 20%;">CB</div>
-      <div class="player" data-player="player4" style="top: 60%; left: 20%;">CB</div>
-      <div class="player" data-player="player5" style="top: 80%; left: 20%;">RB</div>
-    
-      <!-- Midfielders -->
-      <div class="player" data-player="player6" style="top: 20%; left: 50%;">LM</div>
-      <div class="player" data-player="player7" style="top: 40%; left: 50%;">CM</div>
-      <div class="player" data-player="player8" style="top: 60%; left: 50%;">CM</div>
-      <div class="player" data-player="player9" style="top: 80%; left: 50%;">RM</div>
-    
-      <!-- Forwards -->
-      <div class="player" data-player="player10" style="top: 30%; left: 80%;">ST</div>
-      <div class="player" data-player="player11" style="top: 70%; left: 80%;">ST</div>
+    <!-- Example Formations -->
+    <div id="formation1" class="formation" style="display: none;">
+      <!-- Formation 1: 4-3-3 -->
+      <div class="player" data-player="Goalkeeper" style="top: 50%; left: 1%;">GK</div>
+      <div class="player" data-player="Defender 1" style="top: 20%; left: 15%;">DF1</div>
+      <div class="player" data-player="Defender 2" style="top: 20%; left: 35%;">DF2</div>
+      <div class="player" data-player="Defender 3" style="top: 20%; left: 55%;">DF3</div>
+      <div class="player" data-player="Defender 4" style="top: 20%; left: 75%;">DF4</div>
+      <div class="player" data-player="Midfielder 1" style="top: 50%; left: 20%;">MF1</div>
+      <div class="player" data-player="Midfielder 2" style="top: 50%; left: 40%;">MF2</div>
+      <div class="player" data-player="Midfielder 3" style="top: 50%; left: 60%;">MF3</div>
+      <div class="player" data-player="Forward 1" style="top: 80%; left: 30%;">FW1</div>
+      <div class="player" data-player="Forward 2" style="top: 80%; left: 50%;">FW2</div>
+      <div class="player" data-player="Forward 3" style="top: 80%; left: 70%;">FW3</div>
     </div>
-    
+
+    <div id="formation2" class="formation" style="display: none;">
+      <!-- Formation 2: 4-4-2 -->
+      <div class="player" data-player="Goalkeeper" style="top: 50%; left: 1%;">GK</div>
+      <div class="player" data-player="Left Back" style="top: 20%; left: 20%;">LB</div>
+      <div class="player" data-player="Center Back 1" style="top: 40%; left: 20%;">CB</div>
+      <div class="player" data-player="Center Back 2" style="top: 60%; left: 20%;">CB</div>
+      <div class="player" data-player="Right Back" style="top: 80%; left: 20%;">RB</div>
+      <div class="player" data-player="Left Midfield" style="top: 20%; left: 50%;">LM</div>
+      <div class="player" data-player="Center Midfield 1" style="top: 40%; left: 50%;">CM</div>
+      <div class="player" data-player="Center Midfield 2" style="top: 60%; left: 50%;">CM</div>
+      <div class="player" data-player="Right Midfield" style="top: 80%; left: 50%;">RM</div>
+      <div class="player" data-player="Striker 1" style="top: 30%; left: 80%;">ST</div>
+      <div class="player" data-player="Striker 2" style="top: 70%; left: 80%;">ST</div>
+    </div>
+
     <div id="formation3" class="formation" style="display: none;">
-      <!-- Goalkeeper -->
-      <div class="player" data-player="player1" style="top: 50%; left: 1%;">GK</div>
-    
-      <!-- Defenders -->
-      <div class="player" data-player="player2" style="top: 20%; left: 15%;">DF1</div>
-      <div class="player" data-player="player3" style="top: 20%; left: 35%;">DF2</div>
-      <div class="player" data-player="player4" style="top: 20%; left: 55%;">DF3</div>
-      <div class="player" data-player="player5" style="top: 20%; left: 75%;">DF4</div>
-    
-      <!-- Midfielders -->
-      <div class="player" data-player="player6" style="top: 50%; left: 20%;">MF1</div>
-      <div class="player" data-player="player7" style="top: 50%; left: 40%;">MF2</div>
-      <div class="player" data-player="player8" style="top: 50%; left: 60%;">MF3</div>
-    
-      <!-- Forwards -->
-      <div class="player" data-player="player9" style="top: 80%; left: 30%;">FW1</div>
-      <div class="player" data-player="player10" style="top: 80%; left: 50%;">FW2</div>
-      <div class="player" data-player="player11" style="top: 80%; left: 70%;">FW3</div>
+      <!-- Formation 3: 3-3-3 -->
+      <div class="player" data-player="Goalkeeper" style="top: 50%; left: 1%;">GK</div>
+      <div class="player" data-player="Left Back" style="top:15%; left: 20%;">LB</div>
+      <div class="player" data-player="Center Back" style="top: 50%; left: 20%;">CB</div>
+      <div class="player" data-player="Right Back" style="top: 85%; left: 20%;">RB</div>
+      <div class="player" data-player="Left Midfield" style="top: 15%; left: 50%;">LM</div>
+      <div class="player" data-player="Center Midfield" style="top: 50%; left: 50%;">CM</div>
+      <div class="player" data-player="Right Midfield" style="top: 85%; left: 50%;">RM</div>
+      <div class="player" data-player="Left Wing" style="top: 15%; left: 85%;">LW</div>
+      <div class="player" data-player="Striker" style="top: 50%; left: 85%;">ST</div>
+      <div class="player" data-player="Right Wing" style="top: 85%; left: 85%;">RW</div>
     </div>
-    
 
     <div id="instructionModal" class="modal">
       <div class="modal-content">
@@ -193,14 +186,56 @@
   </div>
 
   <script>
-    function showFormation(formationId) {
+    function showFormations() {
+      var playerCount = document.getElementById('playerCount').value;
+      var formationOptions = document.getElementById('formationOptions');
+      formationOptions.style.display = 'none';
+      formationOptions.innerHTML = '';
+
+      if (!playerCount) {
+        document.getElementById('formationTitle').innerText = "Select the number of players";
+        return;
+      }
+
+      var formations = [];
+      switch (playerCount) {
+        case '11':
+          formations = ['4-3-3', '4-4-2', '4-2-3-1'];
+          break;
+        case '10':
+          formations = ['3-3-3', '4-3-2', '4-4-1'];
+          break;
+        case '9':
+          formations = ['3-3-2', '4-3-1', '5-2-1'];
+          break;
+        case '8':
+          formations = ['3-2-2', '4-3', '4-4'];
+          break;
+        case '7':
+          formations = ['3-2-1', '4-2', '3-3'];
+          break;
+      }
+
+      formations.forEach(function (formation, index) {
+        var button = document.createElement('button');
+        button.innerText = formation;
+        button.setAttribute('onclick', `showFormation('formation${index + 1}', '${formation}')`);
+        formationOptions.appendChild(button);
+      });
+
+      formationOptions.style.display = 'block';
+      document.getElementById('formationTitle').innerText = `Choose Formation for ${playerCount} Players`;
+    }
+
+    function showFormation(formationId, formationName) {
       // Hide all formations
-      document.querySelectorAll('.formation').forEach(function(formation) {
+      var formations = document.querySelectorAll('.formation');
+      formations.forEach(function (formation) {
         formation.style.display = 'none';
       });
 
       // Remove active class from all buttons
-      document.querySelectorAll('.header-buttons button').forEach(function(button) {
+      document.querySelectorAll('.header-buttons button').forEach(function (button) {
         button.classList.remove('active');
       });
 
@@ -208,32 +243,26 @@
       document.getElementById(formationId).style.display = 'block';
 
       // Add active class to the selected button
-      document.querySelector('.header-buttons button[onclick="showFormation(\'' + formationId + '\')"]').classList.add('active');
+      document.querySelector(`.header-buttons button[onclick="showFormation('${formationId}', '${formationName}')"]`).classList.add('active');
 
       // Update title
-      var titleText = formationId === 'formation1' ? 'Football Formation: 3-3-3' :
-                      formationId === 'formation2' ? 'Football Formation: 4-4-2' :
-                      'Football Formation: 4-3-3';
-      document.getElementById('formationTitle').innerText = titleText;
+      document.getElementById('formationTitle').innerText = `Football Formation: ${formationName} (${document.getElementById('playerCount').value} players)`;
     }
 
-    // Show the default formation on page load
-    showFormation('formation1');
-
     // Modal handling
-    document.querySelectorAll('.player').forEach(function(player) {
-      player.addEventListener('click', function() {
+    document.querySelectorAll('.player').forEach(function (player) {
+      player.addEventListener('click', function () {
         var playerName = player.getAttribute('data-player');
         document.getElementById('instructionText').innerText = 'Instructions for ' + playerName;
         document.getElementById('instructionModal').style.display = 'block';
       });
     });
 
-    document.querySelector('.close').addEventListener('click', function() {
+    document.querySelector('.close').addEventListener('click', function () {
       document.getElementById('instructionModal').style.display = 'none';
     });
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
       if (event.target === document.getElementById('instructionModal')) {
         document.getElementById('instructionModal').style.display = 'none';
       }
